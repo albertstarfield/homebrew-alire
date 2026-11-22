@@ -1,3 +1,11 @@
+<p align="center">
+  <img src="assets/logo.png" alt="Alire logo" width="160" />
+</p>
+
+<p align="center">
+  <sub>Logo source: <a href="https://github.com/alire-project/alire.ada.dev/blob/master/assets/img/profile.png">Alire official website — assets/img/profile.png</a>. Credit: the Alire project contributors. This Homebrew tap is independent and is not endorsed by the upstream project.</sub>
+</p>
+
 # Alire tap
 
 This tap is maintained by `albertstarfield` as a redistribution convenience. The upstream owner is `alire-project/alire`; the binaries here are the release assets that project builds for Linux and macOS. Homebrew installs a ready-made executable rather than building Alire from source.
