@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import subprocess
 import urllib.request
@@ -60,8 +61,16 @@ end
 '''
 
 
+def api_headers() -> dict[str, str]:
+    headers = {"User-Agent": "AdaHomebrew/1.0", "Accept": "application/vnd.github+json"}
+    token = os.environ.get("GH_TOKEN", "")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    return headers
+
+
 def fetch_releases() -> list[dict[str, Any]]:
-    request = urllib.request.Request(RELEASES, headers={"User-Agent": "AdaHomebrew/1.0"})
+    request = urllib.request.Request(RELEASES, headers=api_headers())
     with urllib.request.urlopen(request, timeout=30) as response:
         payload = json.load(response)
     if not isinstance(payload, list):
