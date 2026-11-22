@@ -1,4 +1,4 @@
-name: Update alr
+name: Fetch latest build for redistribution
 
 on:
   schedule:
