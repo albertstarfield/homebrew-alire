@@ -1,0 +1,15 @@
+name: Cask CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  audit:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Audit formula
+        run: brew audit --strict --online Formula/alr.rb
+      - name: Check style
+        run: brew style Formula/alr.rb
