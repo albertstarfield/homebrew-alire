@@ -26,28 +26,23 @@ PATTERNS = {
 TEMPLATE = '''class Alr < Formula
   desc "Ada and SPARK package manager"
   homepage "https://alire.ada.dev/"
-  version "{version}"
+  # upstream owner: alire-project/alire
+  # updater-version: {version}
 
-  on_macos do
-    on_arm do
+  if OS.mac?
+    if Hardware::CPU.arm?
       url "{macos_aarch64_url}"
       sha256 "{macos_aarch64_sha}"
-    end
-    on_intel do
+    else
       url "{macos_x86_64_url}"
       sha256 "{macos_x86_64_sha}"
     end
-  end
-
-  on_linux do
-    on_arm do
-      url "{linux_aarch64_url}"
-      sha256 "{linux_aarch64_sha}"
-    end
-    on_intel do
-      url "{linux_x86_64_url}"
-      sha256 "{linux_x86_64_sha}"
-    end
+  elsif Hardware::CPU.arm?
+    url "{linux_aarch64_url}"
+    sha256 "{linux_aarch64_sha}"
+  else
+    url "{linux_x86_64_url}"
+    sha256 "{linux_x86_64_sha}"
   end
 
   def install
@@ -91,7 +86,7 @@ def version_key(version: str) -> tuple[int, int, int]:
 def current_version() -> str:
     if not FORMULA.exists():
         return ""
-    match = re.search(r'version "([^"]+)"', FORMULA.read_text(encoding="utf-8"))
+    match = re.search(r"updater-version:\s*([^\s]+)", FORMULA.read_text(encoding="utf-8"))
     return match.group(1) if match else ""
 
 
