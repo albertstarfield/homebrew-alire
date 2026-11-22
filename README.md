@@ -89,6 +89,10 @@ Another tap may already define a cask with the same name. Uninstall it first, th
 
 Homebrew derives the formula version from the URL. The updater keeps `# updater-version:` as a comment so it can detect changes without triggering the "version is redundant" audit error. Do not turn that comment back into a `version` stanza.
 
+**Why does `alr --version` still use `/usr/local/bin/alr`?**
+
+Homebrew found another `alr` earlier in your `PATH`. The installed copy is `/opt/homebrew/bin/alr`; run that path directly, or remove the older `/usr/local/bin/alr` if you want the Homebrew one to win. Check with `which alr`.
+
 **Why does `gprbuild` fail in a fresh CI job?**
 
 The Ubuntu runner starts without Ada tools. The workflow installs both `gnat` and `gprbuild`. Install both locally if you want to run the decision binary before pushing.
