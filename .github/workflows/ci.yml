@@ -42,7 +42,7 @@ jobs:
       - name: Audit formula
         env:
           TARGET: ${{ matrix.target }}
-        run: brew audit --strict --online "$TARGET"
+        run: brew audit --strict --online --formula "$TARGET"
       - name: Check style
         env:
           TARGET: ${{ matrix.target }}
