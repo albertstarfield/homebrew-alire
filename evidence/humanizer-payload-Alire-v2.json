@@ -1,0 +1,17 @@
+{
+  "model": "humanizer-1B-OptiQ-4bit",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Rewrite the markdown in a plain human voice. Copy every fenced code block exactly as-is, including all shell commands and the owner albertstarfield. Keep headings and version numbers. No emojis. Return only markdown."
+    },
+    {
+      "role": "user",
+      "content": "# Alire tap\n\nThis tap ships `alr`, the Alire package manager for Ada and SPARK, as a Homebrew formula. The formula points at the binaries that the Alire project builds for Linux and macOS, so Homebrew installs a ready-made executable rather than building Alire from source.\n\n## One-line install\n\n```\nbrew tap albertstarfield/alire && brew install alr\n```\n\n## Add the tap\n\n```\nbrew tap albertstarfield/alire\n```\n\nHomebrew shortens `homebrew-alire` to `alire` in tap commands. If you are working from a local checkout instead, use `brew tap albertstarfield/alire ./Alire`.\n\n## Install\n\n```\nbrew install alr\n```\n\nOnce the tap is added, the short name is enough. To be explicit about where the formula comes from:\n\n```\nbrew install albertstarfield/alire/alr\n```\n\nThe formula picks the zip for your OS and CPU: `alr-2.1.1-bin-x86_64-linux.zip`, `alr-2.1.1-bin-aarch64-linux.zip`, `alr-2.1.1-bin-x86_64-macos.zip`, `alr-2.1.1-bin-aarch64-macos.zip` or `alr-2.1.1-bin-universal-macos.zip`. Each zip contains `bin/alr` and `LICENSE.txt`. Version and digests come from the upstream GitHub release, stored under `evidence/alire-releases.json`.\n\nCheck the install with:\n\n```\nalr --version\n```\n\n## Upgrade\n\n```\nbrew update\nbrew upgrade alr\n```\n\nA daily GitHub Actions workflow checks the upstream release feed. When the release tag changes and all four platform assets are present, it opens a pull request with the new version and SHA-256 values. The release-check decision lives in the SPARK package `src/updater.ads`; `src/main.adb` only reads the facts on stdin. No pull request is opened when the tag is unchanged, the token is invalid, or one of the platform assets is missing.\n\nTo inspect the decision locally:\n\n```\ngprbuild -P updater.gpr\ngnatprove --mode=all --level=4 -j0 -P updater.gpr\n```\n\n## Remove\n\n```\nbrew uninstall alr\nbrew untap albertstarfield/alire\n```\n\n## Layout\n\n- `Formula/alr.rb` - the installable formula\n- `src/updater.ads`, `src/updater.adb` - SPARK release-readiness logic\n- `src/main.adb` - stdin/stdout boundary\n- `scripts/update_alr.py` - fetches releases and renders the formula\n- `.github/workflows/update.yml` - daily check\n- `.github/workflows/ci.yml` - style and audit on pushes and pull requests\n- `evidence/` - raw release JSON and the copied Homebrew documentation\n\nThe owner is `albertstarfield`.\n"
+    }
+  ],
+  "temperature": 0.6,
+  "frequency_penalty": 0.6,
+  "presence_penalty": 0.3,
+  "max_tokens": 3500
+}

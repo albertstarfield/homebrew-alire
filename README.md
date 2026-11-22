@@ -2,13 +2,19 @@
 
 This tap ships `alr`, the Alire package manager for Ada and SPARK, as a Homebrew formula. The formula points at the binaries that the Alire project builds for Linux and macOS, so Homebrew installs a ready-made executable rather than building Alire from source.
 
+## One-line install
+
+```
+brew tap albertstarfield/alire && brew install alr
+```
+
 ## Add the tap
 
 ```
-brew tap <you>/alire
+brew tap albertstarfield/alire
 ```
 
-Homebrew shortens `homebrew-alire` to `alire` in tap commands. If you are working from a local checkout instead, use `brew tap <you>/alire ./Alire`.
+Homebrew shortens `homebrew-alire` to `alire` in tap commands. If you are working from a local checkout instead, use `brew tap albertstarfield/alire ./Alire`.
 
 ## Install
 
@@ -19,7 +25,7 @@ brew install alr
 Once the tap is added, the short name is enough. To be explicit about where the formula comes from:
 
 ```
-brew install <you>/alire/alr
+brew install albertstarfield/alire/alr
 ```
 
 The formula picks the zip for your OS and CPU: `alr-2.1.1-bin-x86_64-linux.zip`, `alr-2.1.1-bin-aarch64-linux.zip`, `alr-2.1.1-bin-x86_64-macos.zip`, `alr-2.1.1-bin-aarch64-macos.zip` or `alr-2.1.1-bin-universal-macos.zip`. Each zip contains `bin/alr` and `LICENSE.txt`. Version and digests come from the upstream GitHub release, stored under `evidence/alire-releases.json`.
@@ -50,7 +56,7 @@ gnatprove --mode=all --level=4 -j0 -P updater.gpr
 
 ```
 brew uninstall alr
-brew untap <you>/alire
+brew untap albertstarfield/alire
 ```
 
 ## Layout
@@ -63,4 +69,4 @@ brew untap <you>/alire
 - `.github/workflows/ci.yml` - style and audit on pushes and pull requests
 - `evidence/` - raw release JSON and the copied Homebrew documentation
 
-Replace `<you>` with your GitHub owner or organisation name before publishing.
+The owner is `albertstarfield`.
